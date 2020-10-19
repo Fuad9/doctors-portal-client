@@ -1,7 +1,6 @@
 import React from "react";
 import Modal from "react-modal";
 import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
 
 const customStyles = {
     content: {
@@ -14,10 +13,12 @@ const customStyles = {
     },
 };
 
-// Modal.setAppElement("#root");
+Modal.setAppElement("#root");
 
 const AppointmentForm = ({ modalIsOpen, closeModal, appointmentOn, date }) => {
     const { register, handleSubmit, errors } = useForm();
+
+    console.log(appointmentOn, date);
 
     const onSubmit = (data) => {
         data.service = appointmentOn;

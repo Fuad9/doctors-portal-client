@@ -11,7 +11,7 @@ import Axios from "axios";
 
 const Sidebar = () => {
     const [loggedInUser] = useContext(UserContext);
-    const [isDoctor, setIsDoctor] = useState(false);
+    const [isDoctor, setIsDoctor] = useContext(DoctorsContext);
 
     useEffect(() => {
         const postDoctorData = async () => {
@@ -27,7 +27,7 @@ const Sidebar = () => {
         postDoctorData();
     }, [loggedInUser.email, setIsDoctor]);
 
-    // console.log(() => isDoctor);
+    console.log(isDoctor);
 
     return (
         <div className="sidebar d-flex flex-column justify-content-between col-md-2 py-5 px-4" style={{ height: "100vh" }}>

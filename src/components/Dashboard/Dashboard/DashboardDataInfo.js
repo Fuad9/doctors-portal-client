@@ -66,7 +66,9 @@ const DashboardDataInfo = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                <DashboardDataTable dashboardInfo={dashboardInfo} />
+                                {dashboardInfo.map((info, index) => (
+                                    <DashboardDataTable info={info} index={index} key={info._id} />
+                                ))}
                             </tbody>
                         </table>
                     </div>

@@ -1,11 +1,7 @@
-import { Modal } from "@material-ui/core";
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
 import PrescriptionForm from "../PrescriptionForm/PrescriptionForm";
 
 const PrescriptionsDataTable = ({ prescriptions }) => {
-    const { register, handleSubmit, errors } = useForm();
-
     const [modalIsOpen, setIsOpen] = useState(false);
     function openModal() {
         setIsOpen(true);
@@ -38,16 +34,16 @@ const PrescriptionsDataTable = ({ prescriptions }) => {
             </thead>
             <tbody>
                 {prescriptions.map((prescription, index) => (
-                    <tr>
+                    <tr key={Math.random()}>
                         <td>{index + 1}</td>
-                        <td>{prescription.date}</td>
-                        <td>{prescription.name}</td>
-                        <td>{prescription.phone}</td>
+                        <td>{prescription.appointment.date}</td>
+                        <td>{prescription.appointment.name}</td>
+                        <td>{prescription.appointment.phone}</td>
                         <td>
                             <button onClick={openModal} className="btn btn-brand text-uppercase">
                                 View
                             </button>
-                            <PrescriptionForm modalIsOpen={modalIsOpen} prescription={prescription} closeModal={closeModal}></PrescriptionForm>
+                            <PrescriptionForm modalIsOpen={modalIsOpen} prescriptionOn={prescription.appointment.name} closeModal={closeModal}></PrescriptionForm>
                         </td>
                     </tr>
                 ))}

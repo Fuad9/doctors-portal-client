@@ -20,34 +20,36 @@ function App() {
 
     return (
         <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
-            <Router>
-                <Switch>
-                    <Route path="/bookAppointment">
-                        <Appointment></Appointment>
-                    </Route>
-                    <PrivateRoute path="/appointments">
-                        <Dashboard></Dashboard>
-                    </PrivateRoute>
-                    <PrivateRoute path="/allAppointments">
-                        <DashboardDataInfo />
-                    </PrivateRoute>
-                    <PrivateRoute path="/allPatients">
-                        <AllPatients></AllPatients>
-                    </PrivateRoute>
-                    <PrivateRoute path="/prescriptions">
-                        <Prescriptions />
-                    </PrivateRoute>
-                    <PrivateRoute path="/addDoctor">
-                        <AddDoctor />
-                    </PrivateRoute>
-                    <Route path="/login">
-                        <Login></Login>
-                    </Route>
-                    <Route exact path="/">
-                        <Home></Home>
-                    </Route>
-                </Switch>
-            </Router>
+            <DoctorsContext.Provider value={[isDoctor, setIsDoctor]}>
+                <Router>
+                    <Switch>
+                        <Route path="/bookAppointment">
+                            <Appointment></Appointment>
+                        </Route>
+                        <PrivateRoute path="/appointments">
+                            <Dashboard></Dashboard>
+                        </PrivateRoute>
+                        <PrivateRoute path="/allAppointments">
+                            <DashboardDataInfo />
+                        </PrivateRoute>
+                        <PrivateRoute path="/allPatients">
+                            <AllPatients></AllPatients>
+                        </PrivateRoute>
+                        <PrivateRoute path="/prescriptions">
+                            <Prescriptions />
+                        </PrivateRoute>
+                        <PrivateRoute path="/addDoctor">
+                            <AddDoctor />
+                        </PrivateRoute>
+                        <Route path="/login">
+                            <Login></Login>
+                        </Route>
+                        <Route exact path="/">
+                            <Home></Home>
+                        </Route>
+                    </Switch>
+                </Router>
+            </DoctorsContext.Provider>
         </UserContext.Provider>
     );
 }

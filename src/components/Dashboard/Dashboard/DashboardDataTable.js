@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
-import { DoctorsContext, UserContext } from "../../../App";
+import { DoctorsContext } from "../../../App";
 import { Form } from "react-bootstrap";
 
 const DashboardDataTable = ({ info, index }) => {
-    const [loggedInUser] = useContext(UserContext);
     const [isDoctor] = useContext(DoctorsContext);
 
     const handleStatus = (e) => {
@@ -23,15 +22,15 @@ const DashboardDataTable = ({ info, index }) => {
 
     return (
         <>
-            {isDoctor && (
-                <tr key={Math.random()}>
-                    <td>{index + 1}</td>
-                    <td>{info.appointment.date}</td>
-                    <td>{info.appointment.name}</td>
-                    <td>{info.appointment.phone}</td>
-                    <td>Prescriptions</td>
-                    <td>
-                        {info.status == "Pending" && (
+            <tr key={Math.random()}>
+                <td>{index + 1}</td>
+                <td>{info.appointment.date}</td>
+                <td>{info.appointment.name}</td>
+                <td>{info.appointment.phone}</td>
+                <td>Prescriptions</td>
+                <td>
+                    {isDoctor ? (
+                        info.status == "Pending" ? (
                             <Form.Control as="select" className="text-danger" onChange={handleStatus}>
                                 <option selected style={{ color: "#FF4545" }}>
                                     Pending
@@ -39,8 +38,7 @@ const DashboardDataTable = ({ info, index }) => {
                                 <option style={{ color: "#009444" }}>Approved</option>
                                 <option style={{ color: "#FFBD3E" }}>Cancelled</option>
                             </Form.Control>
-                        )}
-                        {info.status == "Approved" && (
+                        ) : info.status == "Approved" ? (
                             <Form.Control as="select" className="text-success" onChange={handleStatus}>
                                 <option style={{ color: "#FF4545" }}>Pending</option>
                                 <option selected style={{ color: "#009444" }}>
@@ -48,8 +46,7 @@ const DashboardDataTable = ({ info, index }) => {
                                 </option>
                                 <option style={{ color: "#FFBD3E" }}>Cancelled</option>
                             </Form.Control>
-                        )}
-                        {info.status == "Cancelled" && (
+                        ) : (
                             <Form.Control as="select" className="text-warning" onChange={handleStatus}>
                                 <option style={{ color: "#FF4545" }}>Pending</option>
                                 <option style={{ color: "#009444" }}>Approved</option>
@@ -57,10 +54,21 @@ const DashboardDataTable = ({ info, index }) => {
                                     Cancelled
                                 </option>
                             </Form.Control>
-                        )}
-                    </td>
-                </tr>
-            )}
+                        )
+                    ) : (
+                        <p
+                            style={{
+                                background: info.status == "Pending" ? "#FFE3E3" : info.status == "Approved" ? "#C6FFE0" : "#fff6e5",
+                                color: info.status == "Pending" ? "#FF4545" : info.status == "Approved" ? "#009444" : "#FFBD3E",
+                                borderRadius: "5px",
+                                padding: "5px 8px",
+                            }}
+                        >
+                            {info.status}
+                        </p>
+                    )}
+                </td>
+            </tr>
         </>
     );
 };

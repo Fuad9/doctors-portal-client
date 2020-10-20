@@ -1,6 +1,6 @@
 import Axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { UserContext } from "../../../App";
+import { DoctorsContext, UserContext } from "../../../App";
 import Loading from "../../Loading/Loading";
 import Sidebar from "../Sidebar/Sidebar";
 import DashboardDataTable from "./DashboardDataTable";
@@ -35,13 +35,7 @@ const DashboardDataInfo = () => {
                 {isLoading ? (
                     <Loading />
                 ) : (
-                    <div
-                        className="mt-5"
-                        style={{
-                            backgroundColor: "#F4FDFB",
-                            height: "100vh",
-                        }}
-                    >
+                    <div className="mt-5" style={{ backgroundColor: "#F4FDFB", height: "100vh" }}>
                         <table className="table table-borderless">
                             <thead style={{ backgroundColor: "lightgray" }}>
                                 <tr>

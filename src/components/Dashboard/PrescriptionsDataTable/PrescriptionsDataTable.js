@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { DateContext } from "../../../App";
 import PrescriptionForm from "../PrescriptionForm/PrescriptionForm";
 
 const PrescriptionsDataTable = ({ prescriptions }) => {
+    const [selectedDate] = useContext(DateContext);
+
     const [modalIsOpen, setIsOpen] = useState(false);
     function openModal() {
         setIsOpen(true);
@@ -43,7 +46,7 @@ const PrescriptionsDataTable = ({ prescriptions }) => {
                             <button onClick={openModal} className="btn btn-brand text-uppercase">
                                 View
                             </button>
-                            <PrescriptionForm modalIsOpen={modalIsOpen} prescriptionOn={prescription.appointment.name} closeModal={closeModal}></PrescriptionForm>
+                            <PrescriptionForm prescription={prescription.appointment} modalIsOpen={modalIsOpen} closeModal={closeModal}></PrescriptionForm>
                         </td>
                     </tr>
                 ))}

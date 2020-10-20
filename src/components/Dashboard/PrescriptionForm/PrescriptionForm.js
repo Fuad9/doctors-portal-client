@@ -15,14 +15,13 @@ const customStyles = {
 
 Modal.setAppElement("#root");
 
-const PrescriptionForm = ({ modalIsOpen, prescriptionOn, closeModal }) => {
+const PrescriptionForm = ({ prescription, modalIsOpen, closeModal }) => {
     const { register, handleSubmit, errors } = useForm();
-    // const { name, age, weight } = prescriptionOn;
-
-    console.log(prescriptionOn);
+    const { name, date } = prescription;
 
     const onSubmit = (data) => {
-        data.name = prescriptionOn;
+        data.name = name;
+        data.date = date;
 
         fetch("http://localhost:5000/addPrescriptions", {
             method: "POST",
@@ -38,11 +37,16 @@ const PrescriptionForm = ({ modalIsOpen, prescriptionOn, closeModal }) => {
             });
     };
 
+    console.log(name, date);
+
     return (
         <div>
             <Modal isOpen={modalIsOpen} onRequestClose={closeModal} style={customStyles} contentLabel="Example Modal">
                 <div className="d-flex justify-content-between">
-                    <p className="text-brand">Name: {prescriptionOn}</p>
+                    <p className="text-brand">{name}</p>
+                    <p className="text-secondary text-center">
+                        <small>{date}</small>
+                    </p>
                 </div>
                 <form className="p-5" onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-group row">
@@ -51,7 +55,7 @@ const PrescriptionForm = ({ modalIsOpen, prescriptionOn, closeModal }) => {
                             {errors.age && <span className="text-danger">This field is required</span>}
                         </div>
                         <div className="col-4">
-                            <input ref={register({ required: true })} className="form-control" name="frequency" placeholder="" type="text" />
+                            <input ref={register({ required: true })} className="form-control" name="dose" placeholder="" type="text" />
                             {errors.age && <span className="text-danger">This field is required</span>}
                         </div>
                         <div className="col-4">
@@ -59,7 +63,7 @@ const PrescriptionForm = ({ modalIsOpen, prescriptionOn, closeModal }) => {
                             {errors.weight && <span className="text-danger">This field is required</span>}
                         </div>
                     </div>
-                    <button>Submit</button>
+                    <button className="btn btn-brand">Submit</button>
                 </form>
             </Modal>
         </div>

@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
-import Footer from '../../Shared/Footer/Footer';
-import Navbar from '../../Shared/Navbar/Navbar';
-import AppointmentHeader from '../AppointmentHeader/AppointmentHeader';
-import BookAppointment from '../BookAppointment/BookAppointment';
+import React, { useContext, useState } from "react";
+import { DateContext } from "../../../App";
+import Footer from "../../Shared/Footer/Footer";
+import Navbar from "../../Shared/Navbar/Navbar";
+import AppointmentHeader from "../AppointmentHeader/AppointmentHeader";
+import BookAppointment from "../BookAppointment/BookAppointment";
 
 const Appointment = () => {
-    const [selectedDate, setSelectedDate] = useState(new Date());
-    const handleDateChange = date => {
+    const [selectedDate, setSelectedDate] = useContext(DateContext);
+    const handleDateChange = (date) => {
         setSelectedDate(date);
-    }
+    };
     return (
         <div>
             <Navbar></Navbar>

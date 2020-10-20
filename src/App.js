@@ -13,42 +13,46 @@ import Prescriptions from "./components/Dashboard/Prescriptions/Prescriptions";
 
 export const UserContext = createContext();
 export const DoctorsContext = createContext();
+export const DateContext = createContext();
 
 function App() {
     const [loggedInUser, setLoggedInUser] = useState({});
     const [isDoctor, setIsDoctor] = useState(false);
+    const [selectedDate, setSelectedDate] = useState(new Date());
 
     return (
         <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
             <DoctorsContext.Provider value={[isDoctor, setIsDoctor]}>
-                <Router>
-                    <Switch>
-                        <Route path="/bookAppointment">
-                            <Appointment></Appointment>
-                        </Route>
-                        <PrivateRoute path="/appointments">
-                            <Dashboard></Dashboard>
-                        </PrivateRoute>
-                        <PrivateRoute path="/allAppointments">
-                            <DashboardDataInfo />
-                        </PrivateRoute>
-                        <PrivateRoute path="/allPatients">
-                            <AllPatients></AllPatients>
-                        </PrivateRoute>
-                        <PrivateRoute path="/prescriptions">
-                            <Prescriptions />
-                        </PrivateRoute>
-                        <PrivateRoute path="/addDoctor">
-                            <AddDoctor />
-                        </PrivateRoute>
-                        <Route path="/login">
-                            <Login></Login>
-                        </Route>
-                        <Route exact path="/">
-                            <Home></Home>
-                        </Route>
-                    </Switch>
-                </Router>
+                <DateContext.Provider value={[selectedDate, setSelectedDate]}>
+                    <Router>
+                        <Switch>
+                            <Route path="/bookAppointment">
+                                <Appointment></Appointment>
+                            </Route>
+                            <PrivateRoute path="/appointments">
+                                <Dashboard></Dashboard>
+                            </PrivateRoute>
+                            <PrivateRoute path="/allAppointments">
+                                <DashboardDataInfo />
+                            </PrivateRoute>
+                            <PrivateRoute path="/allPatients">
+                                <AllPatients></AllPatients>
+                            </PrivateRoute>
+                            <PrivateRoute path="/prescriptions">
+                                <Prescriptions />
+                            </PrivateRoute>
+                            <PrivateRoute path="/addDoctor">
+                                <AddDoctor />
+                            </PrivateRoute>
+                            <Route path="/login">
+                                <Login></Login>
+                            </Route>
+                            <Route exact path="/">
+                                <Home></Home>
+                            </Route>
+                        </Switch>
+                    </Router>
+                </DateContext.Provider>
             </DoctorsContext.Provider>
         </UserContext.Provider>
     );

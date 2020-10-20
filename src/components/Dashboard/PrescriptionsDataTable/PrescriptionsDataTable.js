@@ -1,12 +1,13 @@
-import React, { useContext, useState } from "react";
-import { DateContext } from "../../../App";
-import PrescriptionForm from "../PrescriptionForm/PrescriptionForm";
+import React, { useState } from "react";
+import PrescriptionModal from "../PrescriptionModal/PrescriptionModal";
 
 const PrescriptionsDataTable = ({ prescriptions }) => {
-    const [selectedDate] = useContext(DateContext);
-
     const [modalIsOpen, setIsOpen] = useState(false);
-    function openModal() {
+    const [modalData, setModalData] = useState({});
+
+    function openModal(id) {
+        const p = prescriptions.find((a) => a._id === id);
+        setModalData(p.appointment);
         setIsOpen(true);
     }
 
@@ -37,16 +38,18 @@ const PrescriptionsDataTable = ({ prescriptions }) => {
             </thead>
             <tbody>
                 {prescriptions.map((prescription, index) => (
-                    <tr key={Math.random()}>
+                    <tr key={prescription._id}>
                         <td>{index + 1}</td>
                         <td>{prescription.appointment.date}</td>
                         <td>{prescription.appointment.name}</td>
                         <td>{prescription.appointment.phone}</td>
                         <td>
-                            <button onClick={openModal} className="btn btn-brand text-uppercase">
-                                View
-                            </button>
-                            <PrescriptionForm prescription={prescription.appointment} modalIsOpen={modalIsOpen} closeModal={closeModal}></PrescriptionForm>
+                            <div>
+                                <button onClick={() => openModal(prescription._id)} className="btn btn-brand text-uppercase">
+                                    View
+                                </button>
+                                <PrescriptionModal modalData={modalData} modalIsOpen={modalIsOpen} closeModal={closeModal} />
+                            </div>
                         </td>
                     </tr>
                 ))}

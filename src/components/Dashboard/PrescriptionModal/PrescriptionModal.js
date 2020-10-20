@@ -15,13 +15,12 @@ const customStyles = {
 
 Modal.setAppElement("#root");
 
-const PrescriptionForm = ({ prescription, modalIsOpen, closeModal }) => {
+const PrescriptionForm = ({ modalIsOpen, closeModal, modalData }) => {
     const { register, handleSubmit, errors } = useForm();
-    const { name, date } = prescription;
 
     const onSubmit = (data) => {
-        data.name = name;
-        data.date = date;
+        // data.name = name;
+        // data.date = date;
 
         fetch("http://localhost:5000/addPrescriptions", {
             method: "POST",
@@ -37,15 +36,19 @@ const PrescriptionForm = ({ prescription, modalIsOpen, closeModal }) => {
             });
     };
 
-    console.log(name, date);
-
     return (
         <div>
             <Modal isOpen={modalIsOpen} onRequestClose={closeModal} style={customStyles} contentLabel="Example Modal">
                 <div className="d-flex justify-content-between">
-                    <p className="text-brand">{name}</p>
-                    <p className="text-secondary text-center">
-                        <small>{date}</small>
+                    <p className="text-brand font-weight-bold">{modalData.name}</p>
+                    <p>
+                        Age: <small className="text-secondary text-center">{modalData.age}</small>
+                    </p>
+                    <p>
+                        Weight: <small className="text-secondary text-center">{modalData.weight}</small>
+                    </p>
+                    <p>
+                        Date: <small className="text-secondary text-center">{modalData.date}</small>
                     </p>
                 </div>
                 <form className="p-5" onSubmit={handleSubmit(onSubmit)}>
@@ -55,7 +58,7 @@ const PrescriptionForm = ({ prescription, modalIsOpen, closeModal }) => {
                             {errors.age && <span className="text-danger">This field is required</span>}
                         </div>
                         <div className="col-4">
-                            <input ref={register({ required: true })} className="form-control" name="dose" placeholder="" type="text" />
+                            <input ref={register({ required: true })} className="form-control" name="dose" placeholder="Dose" type="text" />
                             {errors.age && <span className="text-danger">This field is required</span>}
                         </div>
                         <div className="col-4">

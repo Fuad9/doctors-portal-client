@@ -19,8 +19,8 @@ const PrescriptionForm = ({ modalIsOpen, closeModal, modalData }) => {
     const { register, handleSubmit, errors } = useForm();
 
     const onSubmit = (data) => {
-        // data.name = name;
-        // data.date = date;
+        data.name = modalData.name;
+        data.date = modalData.date;
 
         fetch("http://localhost:5000/addPrescriptions", {
             method: "POST",

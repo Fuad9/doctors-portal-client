@@ -1,6 +1,6 @@
-import Axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { DoctorsContext, UserContext } from "../../../App";
+import Axios from "axios";
+import { UserContext } from "../../../App";
 import Loading from "../../Loading/Loading";
 import Sidebar from "../Sidebar/Sidebar";
 import DashboardDataTable from "./DashboardDataTable";

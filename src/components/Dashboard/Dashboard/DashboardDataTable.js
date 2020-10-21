@@ -6,10 +6,12 @@ import PrescriptionsShortList from "./PrescriptionsShortList";
 const DashboardDataTable = ({ info, index }) => {
     const [loggedInUser] = useContext(UserContext);
     const [isDoctor] = useContext(DoctorsContext);
+    const [modalDataInfo, setModalDataInfo] = useState({});
 
     const [modalIsOpen, setIsOpen] = useState(false);
     function openModal() {
         setIsOpen(true);
+        setModalDataInfo(info.appointment);
     }
 
     function closeModal() {
@@ -43,7 +45,7 @@ const DashboardDataTable = ({ info, index }) => {
                         <button onClick={openModal} className="btn btn-brand text-uppercase">
                             View
                         </button>
-                        <PrescriptionsShortList modalIsOpen={modalIsOpen} prescriptionOn={info.appointment.name} closeModal={closeModal} />
+                        <PrescriptionsShortList modalDataInfo={modalDataInfo} modalIsOpen={modalIsOpen} prescriptionOn={info.appointment.name} closeModal={closeModal} />
                     </td>
                     <td>
                         {isDoctor ? (

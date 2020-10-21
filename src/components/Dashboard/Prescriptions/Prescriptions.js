@@ -2,8 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../App";
 import PrescriptionsDataTable from "../PrescriptionsDataTable/PrescriptionsDataTable";
 import Sidebar from "../Sidebar/Sidebar";
-import { useForm } from "react-hook-form";
-import Modal from "react-modal";
 
 const Prescriptions = () => {
     const [prescriptions, setPrescriptions] = useState([]);

@@ -10,7 +10,7 @@ const Doctors = () => {
         const getTableData = async () => {
             try {
                 setIsLoading(true);
-                const response = await Axios.get("http://localhost:5000/doctors");
+                const response = await Axios.get("https://desolate-anchorage-37987.herokuapp.com/doctors");
                 setDoctors(response.data);
                 setIsLoading(false);
             } catch (error) {

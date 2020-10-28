@@ -18,17 +18,13 @@ Modal.setAppElement("#root");
 const PrescriptionsShortList = ({ modalDataInfo, modalIsOpen, closeModal }) => {
     const [prescriptionsInfo, setPrescriptionsInfo] = useState([]);
 
-    console.log(modalDataInfo);
-
     useEffect(() => {
         const getData = async () => {
             try {
-                setIsLoading(true);
-                const response = await Axios.get("http://localhost:5000/showPrescriptions");
+                const response = await Axios.get("https://desolate-anchorage-37987.herokuapp.com/showPrescriptions");
                 setPrescriptionsInfo(response.data);
-                setIsLoading(false);
             } catch (error) {
-                setIsLoading(false);
+                console.log(error);
             }
         };
         getData();
@@ -40,7 +36,7 @@ const PrescriptionsShortList = ({ modalDataInfo, modalIsOpen, closeModal }) => {
                 {prescriptionsInfo.map(
                     (info) =>
                         modalDataInfo.date === info.date && (
-                            <div>
+                            <div key={Math.random()}>
                                 <h5 className="text-brand text-center">Date: {info.date}</h5>
                                 <div className="d-flex justify-content-between" key={Math.random()}>
                                     <p>

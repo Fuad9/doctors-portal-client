@@ -19,7 +19,7 @@ const DashboardDataTable = ({ info, index }) => {
     }
 
     const handleStatus = (e) => {
-        fetch("http://localhost:5000/statusUpdate", {
+        fetch("https://desolate-anchorage-37987.herokuapp.com/statusUpdate", {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

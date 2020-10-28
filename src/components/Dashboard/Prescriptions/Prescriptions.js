@@ -8,7 +8,7 @@ const Prescriptions = () => {
     const [loggedInUser] = useContext(UserContext);
 
     useEffect(() => {
-        fetch("http://localhost:5000/appointments")
+        fetch("https://desolate-anchorage-37987.herokuapp.com/appointments")
             .then((res) => res.json())
             .then((data) => setPrescriptions(data));
     }, []);

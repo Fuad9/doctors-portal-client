@@ -22,7 +22,7 @@ const PrescriptionForm = ({ modalIsOpen, closeModal, modalData }) => {
         data.name = modalData.name;
         data.date = modalData.date;
 
-        fetch("http://localhost:5000/addPrescriptions", {
+        fetch("https://desolate-anchorage-37987.herokuapp.com/addPrescriptions", {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(data),

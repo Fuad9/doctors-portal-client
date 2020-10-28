@@ -16,7 +16,7 @@ const Sidebar = () => {
     useEffect(() => {
         const postDoctorData = async () => {
             try {
-                const response = await Axios.post("http://localhost:5000/isDoctor", {
+                const response = await Axios.post("https://desolate-anchorage-37987.herokuapp.com/isDoctor", {
                     email: loggedInUser.email,
                 });
                 setIsDoctor(response.data);

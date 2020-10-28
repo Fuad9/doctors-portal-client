@@ -14,7 +14,7 @@ const DashboardDataInfo = () => {
         const getData = async () => {
             try {
                 setIsLoading(true);
-                const response = await Axios.get("http://localhost:5000/appointments");
+                const response = await Axios.get("https://desolate-anchorage-37987.herokuapp.com/appointments");
                 setdashboardInfo(response.data);
                 setIsLoading(false);
             } catch (error) {

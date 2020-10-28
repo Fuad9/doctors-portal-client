@@ -11,7 +11,7 @@ const BookAppointment = ({ date }) => {
         const getTableData = async () => {
             try {
                 setIsLoading(true);
-                const response = await Axios.get("http://localhost:5000/showBookings");
+                const response = await Axios.get("https://desolate-anchorage-37987.herokuapp.com/showBookings");
                 setBookings(response.data);
                 setIsLoading(false);
             } catch (error) {
@@ -20,6 +20,8 @@ const BookAppointment = ({ date }) => {
         };
         getTableData();
     }, []);
+
+    console.log(bookings);
 
     return (
         <section>
